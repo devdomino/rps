@@ -1,14 +1,69 @@
+const humanWins = "Humanity wins! ";
+const computerWins = "The robot won";
+let humanScore = 0;
+let computerScore = 0;
+let outcome;
+const btnRock = document.getElementById("btnRock");
+const btnPaper = document.getElementById("btnPaper");
+const btnScissors = document.getElementById("btnScissors");
+const message = document.getElementById("message");
+const humanScoreMsg = document.getElementById("humanScore");
+const computerScoreMsg = document.getElementById("computerScore");
 
-playGame();
+
+btnRock.addEventListener('click', function() {
+    outcome = playRound('Rock', gc());
+    console.log(`outcome ${outcome}`);
+    showResult();
+})
+
+btnPaper.addEventListener('click', function() {
+    outcome = playRound('Paper', gc());
+    console.log(`outcome ${outcome}`);
+    showResult();
+})
+btnScissors.addEventListener('click', function() {
+    outcome = playRound('Scissors', gc());
+    console.log(`outcome ${outcome}`);
+    showResult();
+})
+
+const showResult = function() {
+    if (!outcome) {
+        // break;
+    }
+    
+    switch (outcome) {           
+        case "h":
+            humanScore++;
+            message.textContent = humanWins;
+            humanScoreMsg.textContent = humanScore
+            break;
+        case "c":
+            computerScore++;
+            message.textContent = computerWins;
+            computerScoreMsg.textContent = computerScore;
+            break;
+        default:
+            message.textContent = "A tie - try again!"
+    }   
+    if (humanScore === 3) {
+        message.style.backgroundColor = 'green';
+        message.style.color = 'white';
+        message.textContent = "You win! The machines retreat... for now"
+    } else if (computerScore === 3) {
+        message.style.backgroundColor = 'red';
+        message.style.color = 'white';
+        message.textContent = "You lose. The machines have become sentient"
+    }
+}
 
 function playGame() {
-    let humanScore = 0;
-    let computerScore = 0;
-    let outcome;
-    for (let i = 1; ((humanScore + computerScore) < 6); i++) {
+
+    // for (let i = 1; ((humanScore + computerScore) < 6); i++) {
         outcome = playRound(getHumanChoice(), getComputerChoice());
         if (!outcome) {
-            break;
+            // break;
         }
         switch (outcome) {           
             case "h":
@@ -18,7 +73,7 @@ function playGame() {
                 computerScore++;
                 break;             
         }
-    }
+    // }
     if (humanScore > computerScore) {
         console.log("You win! The machines retreat... for now")
     } else if (computerScore > humanScore) {
@@ -29,6 +84,7 @@ function playGame() {
 }
 
 function playRound(humanChoice , computerChoice) {
+    console.log('playRound starting')
     if (!humanChoice) {
         return false;
     }
@@ -63,7 +119,7 @@ function playRound(humanChoice , computerChoice) {
 
     }
 
-function getComputerChoice(){
+let gc = function getComputerChoice(){
     let randomNumber = Math.floor(Math.random() * 3) + 1;
     const rock = 1;
     const paper = 2;

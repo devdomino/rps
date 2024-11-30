@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0 }
+
+#results {
+    border: solid 2px blueviolet;
+    background-color: antiquewhite;
+    padding: 7px;
+    margin: 10px;
+}
+#message {
+    margin-bottom: 3px;
+}
